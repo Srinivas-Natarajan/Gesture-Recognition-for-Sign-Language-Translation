@@ -11,6 +11,7 @@ This program will use gesture detection to help identify common ASL gestures as 
 - `Gesture Training.ipynb`: Notebook to train new gestures and modify existing ones
 - `playground.ipynb`: General notebook to test out various feature selection methods as well as mediapipe models
 
+<br> 
 
 ## Video Demo
 
