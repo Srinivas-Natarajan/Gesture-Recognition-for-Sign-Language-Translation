@@ -13,5 +13,5 @@ This program will use gesture detection to help identify common ASL gestures as 
 
 
 <video width="320" height="240" controls>
-  <source src="https://github.com/Srinivas-Natarajan/Gesture-Recognition-for-Sign-Language-Translation/blob/main/videos/Two_hand_5_class.mp4" type="video/mp4">
+  <source src="https://youtu.be/sBWiNe0z378" type="video/mp4">
 </video>
