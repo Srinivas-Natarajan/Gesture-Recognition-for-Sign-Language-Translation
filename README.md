@@ -12,6 +12,4 @@ This program will use gesture detection to help identify common ASL gestures as 
 - `playground.ipynb`: General notebook to test out various feature selection methods as well as mediapipe models
 
 
-<video width="320" height="240" controls>
-  <source src="https://youtu.be/sBWiNe0z378" type="video/mp4">
-</video>
+!(Video)[https://youtu.be/sBWiNe0z378]
