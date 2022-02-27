@@ -10,3 +10,8 @@ This program will use gesture detection to help identify common ASL gestures as 
 - `videos`: Video demonstrations of various models in testing
 - `Gesture Training.ipynb`: Notebook to train new gestures and modify existing ones
 - `playground.ipynb`: General notebook to test out various feature selection methods as well as mediapipe models
+
+
+<video width="320" height="240" controls>
+  <source src="https://github.com/Srinivas-Natarajan/Gesture-Recognition-for-Sign-Language-Translation/blob/main/videos/Two_hand_5_class.mp4" type="video/mp4">
+</video>
