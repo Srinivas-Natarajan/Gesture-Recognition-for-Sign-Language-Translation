@@ -46,13 +46,13 @@ jupyter-core==4.9.1
 jupyterlab-pygments==0.1.2
 jupyterlab-widgets==1.0.2
 kaggle==1.5.12
-keras @ file:///home/ktietz/ci_310/keras_split_1643826818613/work/keras-2.6.0-py2.py3-none-any.whl
+keras 
 Keras-Applications==1.0.8
 keras-nightly==2.5.0.dev2021032900
 Keras-Preprocessing==1.1.2
 keyring==23.4.1
 kiwisolver==1.3.1
-lxml @ file:///C:/ci/lxml_1603216357477/work
+lxml 
 Markdown==3.3.6
 MarkupSafe==2.0.1
 matplotlib==3.3.4
