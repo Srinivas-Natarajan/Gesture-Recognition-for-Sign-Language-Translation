@@ -1,3 +1,4 @@
-MP_Data
-MP_Data_Char
-playground
+data/*
+videos/*
+playground/*
+model_saves/*
