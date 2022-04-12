@@ -2,6 +2,37 @@
   display: none;
 }
 
-.container{
+/* .container{
   padding-top: 75%; 
+} */
+
+#model-controls{
+  padding: 5px;
+  min-width: 100%; 
+  width: auto; 
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+#model-change{
+  /* float: left; */
+  display: inline-block;
+  border-radius: 6px;
+  padding: 2px;
+  height: 20%;
+}
+
+#model-name{
+  display: inline-block;
+  padding: 10px;
+}
+
+.output_canvas{
+  padding: 10px;
+  width:100%
+}
+
+.container{
+  max-width: 70%;
+  height:80%;
 }

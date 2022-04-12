@@ -19,7 +19,9 @@
       const videoElement = document.getElementsByClassName('input_video')[0];
       const canvasElement = document.getElementsByClassName('output_canvas')[0];
       const canvasCtx = canvasElement.getContext('2d');  
-      const labelElement = document.getElementById("label");    
+      const labelElement = document.getElementById("label"); 
+      const modelButton = document.getElementById('model-change');   
+      const modelName = document.getElementById('model-name');
 
     // Step 2: Intialize Variables for Model and labels
       let alphabetLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'U', 'V', 'W', 'X', 'Y']
@@ -50,6 +52,14 @@
         }
         return maxIndex;
     }
+
+    modelButton.addEventListener('click', function(){
+      if(modelName.textContent == "Alphabet Model")
+        modelName.textContent = "Gesture Model";
+      else
+        modelName.textContent = "Alphabet Model";
+    });
+
 
     // Step 4: Start loading the model asynchronously   
       console.log("Start Load");
@@ -148,6 +158,11 @@
   <div class="container">
     <video class="input_video"></video>
     <canvas class="output_canvas" width="640px" height="480px"></canvas>
+    <div id="model-controls">
+        <button id="model-change">Change Model</button>
+        <h3 id="model-name">Current Model</h3>
+    </div>
+    
   </div>
 </body>
 </html>
