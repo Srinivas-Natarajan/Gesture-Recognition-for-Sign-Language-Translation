@@ -48,15 +48,31 @@
       });
 
 
+      function indexOfMax(arr) {
+        if (arr.length === 0) {
+            return -1;
+        }
+        var max = arr[0];
+        var maxIndex = 0;
+        for (var i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
+                maxIndex = i;
+                max = arr[i];
+            }
+        }
+        return maxIndex;
+    }
 
 
       async function predictModel(input){
         console.log("Input is: ", input.arraySync());
         const predictionArr = await model.predict(input);
-        console.log("Prediction Array: ", predictionArr);
+        console.log("Prediction Array: ", predictionArr.arraySync());
+        // console.log("Custom Max: ", indexOfMax(predictionArr.arraySync()[0]));
 
-        const prediction =  predictionArr.argMax().dataSync()[0];
+        const prediction =  indexOfMax(predictionArr.arraySync()[0]);
         console.log("ArgMax: ", prediction);
+        // console.log("Array synced Prediction: ", predictionArr.argMax().dataSync());
 
         return alphabetLabels[prediction];
       }
@@ -79,7 +95,7 @@
           for (const landmarks of results.multiHandLandmarks) {
 
               for(let i=0; i<21; i++){
-                const temp = [landmarks[i].x, landmarks[i].y]
+                const temp = [landmarks[i].x * 480, landmarks[i].y * 640]
                 landmark_list.push(temp);
               }
 
