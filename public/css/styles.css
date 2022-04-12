@@ -1,3 +1,7 @@
 .input_video{
   display: none;
 }
+
+.container{
+  padding-top: 75%; 
+}

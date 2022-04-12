@@ -12,15 +12,22 @@
 
   <link rel="stylesheet" href = "css/styles.css">
 
-  <!-- <script type="module" src="mediapipe.js"></script> -->
 
   <script type="module">
+
+    // Step 1: Load HTML elements to JS Variables
       const videoElement = document.getElementsByClassName('input_video')[0];
       const canvasElement = document.getElementsByClassName('output_canvas')[0];
       const canvasCtx = canvasElement.getContext('2d');  
       const labelElement = document.getElementById("label");    
 
-      //////////////////////////////////////////////////////
+    // Step 2: Intialize Variables for Model and labels
+      let alphabetLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'U', 'V', 'W', 'X', 'Y']
+      var model;
+      let label = '';
+
+
+    // Step 3: Initialize static functions used for calculation
       function get_angles(a,b,c){
         ang = (Math.atan2(c[1]-b[1], c[0]-b[0]) - Math.atan2(a[1]-b[1], a[0]-b[0])) * (180/Math.PI);
         if(ang<0)
@@ -28,25 +35,6 @@
         else
           return ang;                                                 
       }
-
-      //////////////////////////////////////////////////////
-      console.log("Start Load");
-
-      var alphabetLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'U', 'V', 'W', 'X', 'Y']
-      var model;
-      let label = '';
-
-      async function loadModel(){
-        const model = await tf.loadLayersModel('model.json')
-        return model;
-      }
-
-      let loadedModel = loadModel().then((resolve, reject)=>{
-        model = resolve;
-      }).then(function() {
-          console.log("Model: ", model) // logs "foo"
-      });
-
 
       function indexOfMax(arr) {
         if (arr.length === 0) {
@@ -63,24 +51,33 @@
         return maxIndex;
     }
 
+    // Step 4: Start loading the model asynchronously   
+      console.log("Start Load");
 
+      async function loadModel(){     // Promise of loading model from JSON file
+        const model = await tf.loadLayersModel('model.json')
+        return model;
+      }
+
+      let loadedModel = loadModel().then((resolve, reject)=>{   //Handing the promise from before
+        model = resolve;
+      }).then(function() {
+          console.log("Model: ", model) 
+      });
+
+
+    // Step 5: Async prediction function which predicts the probabilities of classes and return label
       async function predictModel(input){
         console.log("Input is: ", input.arraySync());
         const predictionArr = await model.predict(input);
-        console.log("Prediction Array: ", predictionArr.arraySync());
-        // console.log("Custom Max: ", indexOfMax(predictionArr.arraySync()[0]));
-
         const prediction =  indexOfMax(predictionArr.arraySync()[0]);
         console.log("ArgMax: ", prediction);
-        // console.log("Array synced Prediction: ", predictionArr.argMax().dataSync());
 
         return alphabetLabels[prediction];
       }
 
-
-
-
-      //////////////////////////////////////////////////////
+    // Step 6: The required onResults function for the Mediapipe model. Collect landmarks and
+    // format them as 3D tensors before passing it to the predct function   
       function onResults(results) {
 
         canvasCtx.save();
@@ -91,11 +88,10 @@
         if (results.multiHandLandmarks) {
 
           const landmark_list =[];
-
           for (const landmarks of results.multiHandLandmarks) {
 
               for(let i=0; i<21; i++){
-                const temp = [landmarks[i].x * 480, landmarks[i].y * 640]
+                const temp = [landmarks[i].x * 480, landmarks[i].y * 640] //Adjust Aspect ratio
                 landmark_list.push(temp);
               }
 
@@ -104,7 +100,6 @@
               drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
               
               console.log(tf.tensor([landmark_list]));
-              // console.log(model.predict(tf.tensor(landmark_list)));
 
               let predictionMade = predictModel(tf.tensor([landmark_list])).then((resolve, reject)=>{
                 label = resolve;
