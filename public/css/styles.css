@@ -1,10 +1,21 @@
+
+#backspace{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#content{
+  padding:10px;
+}
+
+.container{
+  height:80%;
+  width: 80%;
+}
+
 .input_video{
   display: none;
 }
-
-/* .container{
-  padding-top: 75%; 
-} */
 
 #model-controls{
   padding: 5px;
@@ -12,14 +23,14 @@
   width: auto; 
   vertical-align: middle;
   white-space: nowrap;
+  display:flex;
+  justify-content: space-between;
 }
 
+
 #model-change{
-  /* float: left; */
-  display: inline-block;
-  border-radius: 6px;
-  padding: 2px;
-  height: 20%;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 #model-name{
@@ -27,12 +38,19 @@
   padding: 10px;
 }
 
-.output_canvas{
-  padding: 10px;
-  width:100%
+.navbar{
+  border-radius: 0px;
 }
 
-.container{
-  max-width: 70%;
-  height:80%;
+.navbar-brand{
+  padding: 2px 15px;
+}
+
+.output_canvas{
+  padding: 10px;
+  width:640px;
+  height:480px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

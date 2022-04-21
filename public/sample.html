@@ -6,9 +6,14 @@
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js" crossorigin="anonymous"></script>
+
 
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 
   <link rel="stylesheet" href = "css/styles.css">
 
@@ -20,13 +25,24 @@
       const canvasElement = document.getElementsByClassName('output_canvas')[0];
       const canvasCtx = canvasElement.getContext('2d');  
       const labelElement = document.getElementById("label"); 
-      const modelButton = document.getElementById('model-change');   
-      const modelName = document.getElementById('model-name');
+      const modelButton = document.getElementById('model-change'); 
+      const backspaceButton = document.getElementById('backspace'); 
+      const modelName = document.getElementById('model-name');  
+      const mainSentence = document.getElementById('global-sentence'); 
+
+
 
     // Step 2: Intialize Variables for Model and labels
       let alphabetLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'U', 'V', 'W', 'X', 'Y']
-      var model;
+      let gestureLabels = ['Hello', 'Love You', 'Understand', 'Thanks', 'Some', 'Home', 'name', 'my', 'how']
+      let emptyLandmark = [[0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0]]
+      var labels;
       let label = '';
+      var model;
+      let currentModel = "Gesture";
+      let predictionArray = [];
+      let globalSentence = '';
+
 
 
     // Step 3: Initialize static functions used for calculation
@@ -54,26 +70,71 @@
     }
 
     modelButton.addEventListener('click', function(){
-      if(modelName.textContent == "Alphabet Model")
+
+      if(modelName.textContent == "Alphabet Model"){
+       
         modelName.textContent = "Gesture Model";
-      else
+        let loadedModel = loadGestureModel().then((resolve, reject)=>{   //Handing the promise from before
+            model = resolve;
+        }).then(function() {
+            console.log("Model: ", model);
+            currentModel = "Gesture";
+            console.log("Current Model: ", currentModel); 
+        })       
+      }
+      else{
+
         modelName.textContent = "Alphabet Model";
+        let loadedModel = loadAlphabetModel().then((resolve, reject)=>{   //Handing the promise from before
+            model = resolve;
+        }).then(function() {
+            console.log("Model: ", model);
+            currentModel = "Alphabet";
+            console.log("Current Model: ", currentModel);
+        })
+      }
+    });
+
+
+    backspaceButton.addEventListener('click', function(){
+
+      console.log("Length: ", mainSentence.length);
+      if(mainSentence.length != 0){
+        const myArray = globalSentence.split(" ");
+        const newArray = myArray.splice(-(myArray.length-1));
+        let newSentence = "";
+        for(const word of newArray){
+          newSentence += word + ' ';
+        }
+        console.log("New Sentence: ", newSentence);
+        mainSentence.textContent = newSentence;
+      }
     });
 
 
     // Step 4: Start loading the model asynchronously   
       console.log("Start Load");
 
-      async function loadModel(){     // Promise of loading model from JSON file
-        const model = await tf.loadLayersModel('model.json')
+      async function loadAlphabetModel(){     // Promise of loading model from JSON file
+        const model = await tf.loadLayersModel('./models/alphabets/model.json')
+        labels = alphabetLabels;
         return model;
       }
 
-      let loadedModel = loadModel().then((resolve, reject)=>{   //Handing the promise from before
+      async function loadGestureModel(){     // Promise of loading model from JSON file
+        const model = await tf.loadLayersModel('./models/gestures/model.json')
+        labels = gestureLabels;
+        return model;
+      }
+
+      let loadedModel = loadGestureModel().then((resolve, reject)=>{   //Handing the promise from before
         model = resolve;
       }).then(function() {
           console.log("Model: ", model) 
       });
+
+      console.log("Loaded Model: ", loadedModel);
+
 
 
     // Step 5: Async prediction function which predicts the probabilities of classes and return label
@@ -83,67 +144,169 @@
         const prediction =  indexOfMax(predictionArr.arraySync()[0]);
         console.log("ArgMax: ", prediction);
 
-        return alphabetLabels[prediction];
+        return labels[prediction];
       }
+
 
     // Step 6: The required onResults function for the Mediapipe model. Collect landmarks and
     // format them as 3D tensors before passing it to the predct function   
-      function onResults(results) {
 
+      function onAlphabetResults(results) {
+        
         canvasCtx.save();
         canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-        canvasCtx.drawImage(
-            results.image, 0, 0, canvasElement.width, canvasElement.height);
-
-        if (results.multiHandLandmarks) {
-
+        canvasCtx.drawImage(results.image, 0, 0,
+                            canvasElement.width, canvasElement.height);
+          
+        if (results.leftHandLandmarks || results.rightHandLandmarks) {
           const landmark_list =[];
-          for (const landmarks of results.multiHandLandmarks) {
 
-              for(let i=0; i<21; i++){
-                const temp = [landmarks[i].x * 480, landmarks[i].y * 640] //Adjust Aspect ratio
-                landmark_list.push(temp);
-              }
-
-              drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS,
-                            {color: '#00FF00', lineWidth: 5});
-              drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
-              
-              console.log(tf.tensor([landmark_list]));
-
-              let predictionMade = predictModel(tf.tensor([landmark_list])).then((resolve, reject)=>{
-                label = resolve;
-                labelElement.textContent = label;
-                console.log("Promise Output: ", resolve, reject);
-              }).then(function() {
-                  console.log("Answer: ", label);
-              });
-
+          if (results.leftHandLandmarks){
+            console.log("Left hand");
+            for(const landmarks of results.leftHandLandmarks){
+              const temp = [landmarks.x * 480, landmarks.y * 640]   //ADJUST LATER
+              landmark_list.push(temp);
+            }
+          } 
+          
+          else if(results.rightHandLandmarks){
+            console.log("Right hand");
+            for(const landmarks of results.rightHandLandmarks){
+              const temp = [landmarks.x * 480, landmarks.y * 640]   //ADJUST LATER
+              landmark_list.push(temp);
+            }
           }
+
+          let predictionMade = predictModel(tf.tensor([landmark_list])).then((resolve, reject)=>{
+            label = resolve;
+            labelElement.textContent = label;
+            console.log("Promise Output: ", resolve, reject);
+          }).then(function() {
+              console.log("Answer: ", label);
+          });
+
         }
+
+        drawConnectors(canvasCtx, results.leftHandLandmarks, HAND_CONNECTIONS,
+                    {color: '#CC0000', lineWidth: 5});
+        drawLandmarks(canvasCtx, results.leftHandLandmarks,
+                      {color: '#00FF00', lineWidth: 2});
+        drawConnectors(canvasCtx, results.rightHandLandmarks, HAND_CONNECTIONS,
+                      {color: '#00CC00', lineWidth: 5});
+        drawLandmarks(canvasCtx, results.rightHandLandmarks,
+                      {color: '#FF0000', lineWidth: 2});
+
         canvasCtx.restore();
       }
-      
 
-      const hands = new Hands({locateFile: (file) => {
-        return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+
+
+    /////////////////////////////////////////////////////////////////////////
+
+      function onGestureResults(results) {
+        canvasCtx.save();
+        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+        canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+
+        if (results.leftHandLandmarks || results.rightHandLandmarks) {
+
+          let landmark_list =[];
+          let lh = [];
+          let rh = []
+
+          if(!results.leftHandLandmarks){
+            lh = emptyLandmark;
+          } 
+          else{
+            for(const landmarks of results.leftHandLandmarks){
+              const temp = [landmarks.x, landmarks.y]   //ADJUST LATER
+              lh.push(temp);
+            }
+          }
+
+          if(!results.rightHandLandmarks){
+            rh = emptyLandmark;
+          } 
+          else{
+            for(const landmarks of results.rightHandLandmarks){
+              const temp = [landmarks.x, landmarks.y]   //ADJUST LATER
+              rh.push(temp);
+            }
+          }
+
+          landmark_list = lh.map(function(e, i) {
+            return [e[0], e[1],  rh[i][0], rh[i][1]];
+          });
+
+          let predictionMade = predictModel(tf.tensor([landmark_list])).then((resolve, reject)=>{
+            label = resolve;
+            labelElement.textContent = label;
+            console.log("Promise Output: ", resolve, reject);
+          }).then(function() {
+              console.log("Answer: ", label);
+
+              predictionArray.push(label);
+              if(predictionArray.length > 20)
+                predictionArray = predictionArray.slice(-20);
+              console.log(predictionArray);
+
+              let distinctItems = [...new Set(predictionArray)];
+              
+              if(distinctItems.length == 1 && distinctItems.slice(-1)==label && predictionArray.length==20){
+                globalSentence += ' ' + label;
+                // predictionArray.splice(0, predictionArray.length);
+                predictionArray = []
+                mainSentence.textContent = globalSentence;
+              }  
+              console.log("Global Sentence: ", globalSentence);
+              
+          });
+
+        }
+
+        drawConnectors(canvasCtx, results.leftHandLandmarks, HAND_CONNECTIONS,
+                      {color: '#CC0000', lineWidth: 5});
+        drawLandmarks(canvasCtx, results.leftHandLandmarks,
+                      {color: '#00FF00', lineWidth: 2});
+        drawConnectors(canvasCtx, results.rightHandLandmarks, HAND_CONNECTIONS,
+                      {color: '#00CC00', lineWidth: 5});
+        drawLandmarks(canvasCtx, results.rightHandLandmarks,
+                      {color: '#FF0000', lineWidth: 2});
+        canvasCtx.restore();
+      }
+
+      // Deciding which Results fucntion to use
+      function onResults(results){
+        if(currentModel == "Gesture")
+          onGestureResults(results);
+        else
+          onAlphabetResults(results);
+      }
+
+    // Step 7: Defining Holistic Model for pose detection
+
+      const holistic = new Holistic({locateFile: (file) => {
+        return `https://cdn.jsdelivr.net/npm/@mediapipe/holistic/${file}`;
       }});
 
-
-      hands.setOptions({
-        maxNumHands: 2,
+      holistic.setOptions({
         modelComplexity: 1,
+        smoothLandmarks: true,
+        enableSegmentation: true,
+        smoothSegmentation: true,
+        refineFaceLandmarks: true,
         minDetectionConfidence: 0.7,
         minTrackingConfidence: 0.7
       });
-      hands.onResults(onResults);
-      
+
+      holistic.onResults(onResults);
+
       const camera = new Camera(videoElement, {
         onFrame: async () => {
-          await hands.send({image: videoElement});
+          await holistic.send({image: videoElement});
         },
-        width: 1280,
-        height: 720
+        width: 640,
+        height: 480
       });
       camera.start();
 
@@ -152,19 +315,44 @@
 </head>
 
 <body>
-  <h1>Media Pipe Demo</h1>
-  <h2 id="label">Label Here</h1>
 
-  <div class="container">
-    <video class="input_video"></video>
-    <canvas class="output_canvas" width="640px" height="480px"></canvas>
-    <div id="model-controls">
-        <button id="model-change">Change Model</button>
-        <h3 id="model-name">Current Model</h3>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a id="brand" class="navbar-brand" href="#">
+          <img src="./assets/logo_cropped.png" alt="ASL Translator" width="40" height="40" class="d-inline-block align-middle mr-2">
+        </a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Translate</a></li>
+        <li><a href="#">Info</a></li>
+      </ul>
     </div>
-    
+  </nav>
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Bridging gaps in communication</h1>
+      <p class="lead">This is an application which enables hearing impaired people communicate with other people using ASL</p>
+    </div>
   </div>
+
+  <div id="content">
+    <h2 id="global-sentence">Global Sentence</h2>
+    <h3 id="label">Label Here</h3>
+
+    <div class="container">
+      <div id="canvas-video">
+        <video class="input_video"></video>
+        <canvas class="output_canvas" width="640px" height="480px"></canvas>
+    </div>
+
+    <div id="model-controls">
+        <button id="model-change" class="btn btn-primary btn-lg">Change Model</button>
+        <h3 id="model-name">Gesture Model</h3>
+        <button id="backspace" class="btn btn-primary btn-lg">Backspace</button>
+    </div>
+  </div>
+    
 </body>
 </html>
-
-
