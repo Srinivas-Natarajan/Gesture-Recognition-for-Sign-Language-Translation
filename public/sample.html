@@ -99,15 +99,23 @@
     backspaceButton.addEventListener('click', function(){
 
       console.log("Length: ", mainSentence.length);
-      if(mainSentence.length != 0){
-        const myArray = globalSentence.split(" ");
+      if(mainSentence.textContent.length != 0){
+        let sentence = globalSentence.trim()
+        console.log("Sentece: ", sentence);
+        const myArray = sentence.split(" ");
+        console.log("my Array: ", myArray);
+        console.log("Size: ", myArray.length);
         const newArray = myArray.splice(-(myArray.length-1));
+        console.log("new Array: ", newArray);
         let newSentence = "";
         for(const word of newArray){
           newSentence += word + ' ';
         }
         console.log("New Sentence: ", newSentence);
         mainSentence.textContent = newSentence;
+      } 
+      else{
+        mainSentence.textContent = "Global Sentence"
       }
     });
 
