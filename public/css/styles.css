@@ -54,3 +54,23 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+#top-controls{
+  padding: 5px;
+  /* min-width: 100%;  */
+  width: auto; 
+  vertical-align: middle;
+  white-space: nowrap;
+  display:flex;
+  justify-content: space-around;
+}
+
+#global-content{
+  width: auto; 
+  vertical-align: middle;
+  white-space: nowrap;
+  display:flex;
+  justify-content: space-around;
+  padding-left: 2%;
+  padding-right: 2%;
+}

@@ -29,7 +29,7 @@
       const backspaceButton = document.getElementById('backspace'); 
       const modelName = document.getElementById('model-name');  
       const mainSentence = document.getElementById('global-sentence'); 
-
+      const cameraButton = document.getElementById('camera-switch');
 
 
     // Step 2: Intialize Variables for Model and labels
@@ -118,6 +118,9 @@
         mainSentence.textContent = "Global Sentence"
       }
     });
+
+
+    
 
 
     // Step 4: Start loading the model asynchronously   
@@ -318,6 +321,18 @@
       });
       camera.start();
 
+
+      cameraButton.addEventListener('click', function(){
+        // const content = cameraButton.textContent;
+        if(cameraButton.textContent == 'Camera Off'){
+          camera.stop();
+          cameraButton.textContent = 'Camera On';
+        } else{
+          camera.start();
+          cameraButton.textContent = 'Camera Off';
+        }
+      });
+
   </script>
 
 </head>
@@ -346,8 +361,15 @@
   </div>
 
   <div id="content">
-    <h2 id="global-sentence">Global Sentence</h2>
-    <h3 id="label">Label Here</h3>
+
+    <div id="global-content">
+      <h2 id="global-sentence">Global Sentence</h2>
+    </div>
+    <div id="top-controls">
+      <h3 id="label">Label Here</h3>
+      <button id="camera-switch">Camera Off</button>
+    </div>
+    
 
     <div class="container">
       <div id="canvas-video">
