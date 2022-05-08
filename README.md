@@ -16,10 +16,11 @@ This program will use gesture detection to help identify common ASL gestures as 
 
 ## File Descriptions
 
-- `checkpoints`: Contains the Tensorflow checkpoints for various models created during development
-- `videos`: Video demonstrations of various models in testing
-- `Gesture Training.ipynb`: Notebook to train new gestures and modify existing ones
-- `playground.ipynb`: General notebook to test out various feature selection methods as well as mediapipe models
+- `ML`: Contains all files realted to data colelction, preprocessing and model training
+  - `Model Training.ipynb`: Notebook containing various models and feature engineering techniques to comapre performance.  
+- `public`: Files related to the webpage including the HTML/CSS files for page design aand JS scripts
+- `index.js`: Nodejs base file to run the webpage
+
 
 <br> 
 
