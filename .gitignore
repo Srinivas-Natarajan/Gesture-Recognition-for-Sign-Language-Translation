@@ -1,3 +1,5 @@
 ML/data/*
 ML/videos/*
 node_modules/
+!ML/data/results_new.pkl
+!ML/data/dimensions.pkl
