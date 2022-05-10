@@ -1,0 +1,121 @@
+only_coordinates :
+ Accuracy:  0.8615254714325922 
+ F1:  0.855 
+ Sub-Scores: 
+	 A :  {'precision': 0.959, 'f1': 0.979, 'recall': 1.0}
+	 B :  {'precision': 0.987, 'f1': 0.993, 'recall': 1.0}
+	 C :  {'precision': 0.836, 'f1': 0.882, 'recall': 0.932}
+	 D :  {'precision': 1.0, 'f1': 0.67, 'recall': 0.503}
+	 E :  {'precision': 0.977, 'f1': 0.893, 'recall': 0.823}
+	 F :  {'precision': 0.994, 'f1': 0.997, 'recall': 1.0}
+	 G :  {'precision': 0.86, 'f1': 0.918, 'recall': 0.985}
+	 H :  {'precision': 0.942, 'f1': 0.89, 'recall': 0.843}
+	 I :  {'precision': 0.714, 'f1': 0.772, 'recall': 0.841}
+	 J :  {'precision': 0.981, 'f1': 0.867, 'recall': 0.776}
+	 K :  {'precision': 1.0, 'f1': 0.984, 'recall': 0.969}
+	 L :  {'precision': 0.803, 'f1': 0.888, 'recall': 0.994}
+	 M :  {'precision': 0.791, 'f1': 0.878, 'recall': 0.986}
+	 N :  {'precision': 0.994, 'f1': 0.994, 'recall': 0.994}
+	 O :  {'precision': 0.889, 'f1': 0.427, 'recall': 0.281}
+	 P :  {'precision': 1.0, 'f1': 0.997, 'recall': 0.994}
+	 Q :  {'precision': 1.0, 'f1': 1.0, 'recall': 1.0}
+	 R :  {'precision': 0.707, 'f1': 0.704, 'recall': 0.701}
+	 S :  {'precision': 0.451, 'f1': 0.548, 'recall': 0.699}
+	 U :  {'precision': 0.839, 'f1': 0.785, 'recall': 0.738}
+	 V :  {'precision': 0.814, 'f1': 0.888, 'recall': 0.978}
+	 W :  {'precision': 0.994, 'f1': 0.997, 'recall': 1.0}
+	 X :  {'precision': 0.753, 'f1': 0.856, 'recall': 0.992}
+	 Y :  {'precision': 0.746, 'f1': 0.713, 'recall': 0.683}
+
+
+
+two_angles :
+ Accuracy:  0.9513087531663383 
+ F1:  0.949 
+ Sub-Scores: 
+	 A :  {'precision': 0.961, 'f1': 0.81, 'recall': 0.7}
+	 B :  {'precision': 0.949, 'f1': 0.974, 'recall': 1.0}
+	 C :  {'precision': 0.942, 'f1': 0.967, 'recall': 0.993}
+	 D :  {'precision': 1.0, 'f1': 1.0, 'recall': 1.0}
+	 E :  {'precision': 0.994, 'f1': 0.997, 'recall': 1.0}
+	 F :  {'precision': 0.986, 'f1': 0.954, 'recall': 0.923}
+	 G :  {'precision': 0.977, 'f1': 0.981, 'recall': 0.985}
+	 H :  {'precision': 0.992, 'f1': 0.973, 'recall': 0.955}
+	 I :  {'precision': 0.706, 'f1': 0.821, 'recall': 0.981}
+	 J :  {'precision': 0.887, 'f1': 0.937, 'recall': 0.993}
+	 K :  {'precision': 0.988, 'f1': 0.988, 'recall': 0.988}
+	 L :  {'precision': 1.0, 'f1': 0.997, 'recall': 0.994}
+	 M :  {'precision': 0.768, 'f1': 0.869, 'recall': 1.0}
+	 N :  {'precision': 0.994, 'f1': 0.994, 'recall': 0.994}
+	 O :  {'precision': 0.988, 'f1': 0.982, 'recall': 0.977}
+	 P :  {'precision': 1.0, 'f1': 0.997, 'recall': 0.994}
+	 Q :  {'precision': 1.0, 'f1': 1.0, 'recall': 1.0}
+	 R :  {'precision': 1.0, 'f1': 0.989, 'recall': 0.978}
+	 S :  {'precision': 0.993, 'f1': 0.972, 'recall': 0.952}
+	 U :  {'precision': 0.985, 'f1': 0.96, 'recall': 0.936}
+	 V :  {'precision': 0.937, 'f1': 0.964, 'recall': 0.993}
+	 W :  {'precision': 0.994, 'f1': 0.997, 'recall': 1.0}
+	 X :  {'precision': 0.992, 'f1': 0.992, 'recall': 0.992}
+	 Y :  {'precision': 0.971, 'f1': 0.629, 'recall': 0.465}
+
+
+
+angle+distance :
+ Accuracy:  0.9817056009006473 
+ F1:  0.982 
+ Sub-Scores: 
+	 A :  {'precision': 0.952, 'f1': 0.976, 'recall': 1.0}
+	 B :  {'precision': 0.993, 'f1': 0.997, 'recall': 1.0}
+	 C :  {'precision': 1.0, 'f1': 0.983, 'recall': 0.966}
+	 D :  {'precision': 1.0, 'f1': 1.0, 'recall': 1.0}
+	 E :  {'precision': 0.994, 'f1': 0.997, 'recall': 1.0}
+	 F :  {'precision': 0.994, 'f1': 0.997, 'recall': 1.0}
+	 G :  {'precision': 0.942, 'f1': 0.963, 'recall': 0.985}
+	 H :  {'precision': 0.992, 'f1': 0.945, 'recall': 0.903}
+	 I :  {'precision': 0.969, 'f1': 0.984, 'recall': 1.0}
+	 J :  {'precision': 0.963, 'f1': 0.967, 'recall': 0.97}
+	 K :  {'precision': 0.994, 'f1': 0.991, 'recall': 0.988}
+	 L :  {'precision': 1.0, 'f1': 0.997, 'recall': 0.994}
+	 M :  {'precision': 0.973, 'f1': 0.986, 'recall': 1.0}
+	 N :  {'precision': 0.994, 'f1': 0.994, 'recall': 0.994}
+	 O :  {'precision': 0.966, 'f1': 0.977, 'recall': 0.988}
+	 P :  {'precision': 1.0, 'f1': 0.997, 'recall': 0.994}
+	 Q :  {'precision': 1.0, 'f1': 1.0, 'recall': 1.0}
+	 R :  {'precision': 0.905, 'f1': 0.947, 'recall': 0.993}
+	 S :  {'precision': 0.956, 'f1': 0.918, 'recall': 0.884}
+	 U :  {'precision': 0.979, 'f1': 0.989, 'recall': 1.0}
+	 V :  {'precision': 1.0, 'f1': 0.989, 'recall': 0.978}
+	 W :  {'precision': 0.994, 'f1': 0.997, 'recall': 1.0}
+	 X :  {'precision': 1.0, 'f1': 0.967, 'recall': 0.937}
+	 Y :  {'precision': 1.0, 'f1': 0.982, 'recall': 0.965}
+
+
+
+Random_forest :
+ Accuracy:  0.9932451449479314 
+ F1:  0.993 
+ Sub-Scores: 
+	 A :  {'precision': 0.909, 'f1': 0.952, 'recall': 1.0}
+	 B :  {'precision': 0.993, 'f1': 0.997, 'recall': 1.0}
+	 C :  {'precision': 0.993, 'f1': 0.986, 'recall': 0.98}
+	 D :  {'precision': 1.0, 'f1': 1.0, 'recall': 1.0}
+	 E :  {'precision': 1.0, 'f1': 0.997, 'recall': 0.994}
+	 F :  {'precision': 0.994, 'f1': 0.997, 'recall': 1.0}
+	 G :  {'precision': 1.0, 'f1': 0.992, 'recall': 0.985}
+	 H :  {'precision': 1.0, 'f1': 0.992, 'recall': 0.985}
+	 I :  {'precision': 0.994, 'f1': 0.994, 'recall': 0.994}
+	 J :  {'precision': 1.0, 'f1': 0.981, 'recall': 0.963}
+	 K :  {'precision': 1.0, 'f1': 0.994, 'recall': 0.988}
+	 L :  {'precision': 1.0, 'f1': 0.997, 'recall': 0.994}
+	 M :  {'precision': 0.993, 'f1': 0.996, 'recall': 1.0}
+	 N :  {'precision': 0.994, 'f1': 0.994, 'recall': 0.994}
+	 O :  {'precision': 0.994, 'f1': 0.994, 'recall': 0.994}
+	 P :  {'precision': 1.0, 'f1': 0.997, 'recall': 0.994}
+	 Q :  {'precision': 1.0, 'f1': 1.0, 'recall': 1.0}
+	 R :  {'precision': 1.0, 'f1': 0.996, 'recall': 0.993}
+	 S :  {'precision': 0.993, 'f1': 0.997, 'recall': 1.0}
+	 U :  {'precision': 1.0, 'f1': 1.0, 'recall': 1.0}
+	 V :  {'precision': 1.0, 'f1': 0.996, 'recall': 0.993}
+	 W :  {'precision': 0.994, 'f1': 0.997, 'recall': 1.0}
+	 X :  {'precision': 0.992, 'f1': 0.992, 'recall': 0.992}
+	 Y :  {'precision': 1.0, 'f1': 0.996, 'recall': 0.993}
