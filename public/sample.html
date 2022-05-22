@@ -34,7 +34,7 @@
 
     // Step 2: Intialize Variables for Model and labels
       let alphabetLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'U', 'V', 'W', 'X', 'Y']
-      let gestureLabels = ['Hello', 'Love You', 'Understand', 'Thanks', 'Some', 'Home', 'name', 'my', 'how']
+      let gestureLabels = ['eat', 'friend', 'Hello', 'Help me', 'Home', 'how', 'Love You', 'my', 'name', 'No', 'Some', 'Sorry', 'Thanks', 'Understand', 'Yes']
       let emptyLandmark = [[0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0]]
       var labels;
       let label = '';
@@ -133,7 +133,7 @@
       }
 
       async function loadGestureModel(){     // Promise of loading model from JSON file
-        const model = await tf.loadLayersModel('./models/gestures/model.json')
+        const model = await tf.loadLayersModel('./models/gesture_tensorflowjs_model/model.json')
         labels = gestureLabels;
         return model;
       }
@@ -276,13 +276,13 @@
         }
 
         drawConnectors(canvasCtx, results.leftHandLandmarks, HAND_CONNECTIONS,
-                      {color: '#CC0000', lineWidth: 5});
+                      {color: '#858585', lineWidth: 2});  //#CC0000
         drawLandmarks(canvasCtx, results.leftHandLandmarks,
-                      {color: '#00FF00', lineWidth: 2});
+                      {color: '#f77979', lineWidth: 1});  //00FF00
         drawConnectors(canvasCtx, results.rightHandLandmarks, HAND_CONNECTIONS,
-                      {color: '#00CC00', lineWidth: 5});
+                      {color: '#00CC00', lineWidth: 2});
         drawLandmarks(canvasCtx, results.rightHandLandmarks,
-                      {color: '#FF0000', lineWidth: 2});
+                      {color: '#FF0000', lineWidth: 1});
         canvasCtx.restore();
       }
 
