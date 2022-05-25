@@ -9,8 +9,8 @@
 }
 
 .container{
-  height:80%;
-  width: 80%;
+  height:100%;
+  width: 100%;
 }
 
 .input_video{
@@ -31,6 +31,7 @@
 #model-change{
   margin-top: auto;
   margin-bottom: auto;
+  
 }
 
 #model-name{
@@ -40,6 +41,7 @@
 
 .navbar{
   border-radius: 0px;
+  margin-bottom: 0px;
 }
 
 .navbar-brand{
@@ -57,7 +59,7 @@
 
 #top-controls{
   padding: 5px;
-  /* min-width: 100%;  */
+  min-width: 100%; 
   width: auto; 
   vertical-align: middle;
   white-space: nowrap;
@@ -73,4 +75,135 @@
   justify-content: space-around;
   padding-left: 2%;
   padding-right: 2%;
+
+
+  
+}
+
+ *{
+  padding: 0;
+  margin: 0;
+}
+
+#nav-bar{
+  position: sticky;
+  top: 0;
+  z-index: 20;
+ }
+ .navbar-brand img{
+  height: 40px;
+  padding-left: 30px;
+ }
+ .navbar-nav li{
+  padding: 0 10px;
+ }
+ .navbar-nav li a{
+  float: right;
+  text-align: left;
+ }
+ #nav-bar ul li a:hover{
+  color: #007bff!important;
+}
+.navbar{
+ background: #ffffff;
+}
+.navbar-toggler{
+ border: none!important;
+}
+.nav-link{
+ color: white!important;
+ font-weight: 600;
+ font-size: 16px;
+}
+
+#slider{
+  width: 100%;
+  margin-bottom: 40px;
+ }
+ .carousel-caption{
+  padding: 0px;
+  border: 0px;
+  top:60%;
+  transform: translateY(-50%);
+  bottom: initial!important;
+ 
+  border-radius: 20px;
+ }
+ .carousel-caption h5{
+  color:rgba(255, 255, 255, 0.89);
+  font-size: 42px;
+ 
+ }
+
+ #global-sentence {
+  font-size: 62px;
+  font-weight: 600;
+  background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+body{
+ 
+ 
+ 
+
+  background-image: url(../assets/background4.jpg) ;
+ 
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+
+    height:140vh
+    
+  
+ 
+}
+
+#label{
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
+}
+
+#model-name{
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
+  padding-top: 6px;
+
+}
+#model-change:hover{
+  text-align: center;
+  background-color:black;
+}
+#backspace:hover{
+  text-align: center;
+  background-color:black;
+  
+}
+#camera-switch:hover{
+  text-align: center;
+  background-color:black;
+  
+}
+#loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: none;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
