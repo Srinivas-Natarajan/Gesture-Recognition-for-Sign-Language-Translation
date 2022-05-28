@@ -29,6 +29,7 @@
       const labelElement = document.getElementById("label"); 
       const modelButton = document.getElementById('model-change'); 
       const backspaceButton = document.getElementById('backspace'); 
+      const spaceButton = document.getElementById('space'); 
       const modelName = document.getElementById('model-name');  
       const mainSentence = document.getElementById('global-sentence'); 
       const cameraButton = document.getElementById('camera-switch');
@@ -131,7 +132,13 @@
       }
     });
 
-
+    
+ 
+spaceButton.addEventListener('click', function(){
+  mainSentence.textContent+='\xa0\xa0';
+  globalSentence+='\xa0\xa0';
+  
+});
     
 
 
@@ -276,6 +283,7 @@
               let distinctItems = [...new Set(predictionArray)];
               
               if(distinctItems.length == 1 && distinctItems.slice(-1)==label && predictionArray.length==20){
+                
                 globalSentence += ' ' + label;
                 // predictionArray.splice(0, predictionArray.length);
                 predictionArray = []
@@ -436,8 +444,10 @@
   <h2 id="global-sentence">Global Sentence</h2>
 </div>
 <div id="top-controls">
+  <button id="space" class="btn btn-secondary btn-lg">Space</button>
   <h3 id="label">Label Here.</h3>
-  <button class="btn btn-secondary btn-lg" id="camera-switch">Camera Off</button>
+  <button id="backspace" class="btn btn-secondary btn-lg">Backspace</button>
+  
 </div>
 
 
@@ -451,7 +461,7 @@
 <div id="model-controls">
     <button id="model-change" class="btn btn-secondary btn-lg">Change Model</button>
     <h3 id="model-name">Gesture Model</h3>
-    <button id="backspace" class="btn btn-secondary btn-lg">Backspace</button>
+    <button class="btn btn-secondary btn-lg" id="camera-switch">Camera Off</button>
 </div>
 </div>
 
