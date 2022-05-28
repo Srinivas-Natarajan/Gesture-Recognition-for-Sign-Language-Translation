@@ -151,7 +151,7 @@ body{
   background-image: url(../assets/background4.jpg) ;
  
     background-position: center;
-    background-size: cover;
+    background-size:auto;
     text-align: center;
 
     height:140vh
