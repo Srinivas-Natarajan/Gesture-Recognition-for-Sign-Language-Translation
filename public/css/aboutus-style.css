@@ -13,6 +13,49 @@ body{
     background-color: #666666;
 }
 
+.navbar{
+    border-radius: 0px;
+    margin-bottom: 0px;
+    position: absolute;
+    align-self: top;
+   
+  }
+  
+.navbar-brand{
+    padding: 2px 15px;
+  }
+
+  #nav-bar{
+    position: top;
+    top: 0;
+    z-index: 20;
+   }
+   .navbar-brand img{
+    height: 40px;
+    padding-left: 30px;
+   }
+   .navbar-nav li{
+    padding: 0 10px;
+   }
+   .navbar-nav li a{
+    float: right;
+    text-align: left;
+   }
+   #nav-bar ul li a:hover{
+    color: #007bff!important;
+  }
+  .navbar{
+   background: #ffffff;
+  }
+  .navbar-toggler{
+   border: none!important;
+  }
+  .nav-link{
+   color: white!important;
+   font-weight: 600;
+   font-size: 16px;
+  }
+
 .about-section{
     background: url(../assets/background2.png) no-repeat left;
     background-size: 90%;
