@@ -6,8 +6,10 @@
 }
 
 body{
+    height:100%;
     min-height: 100vh;
     display: flex;
+    background-size:cover;
     align-items: center;
     justify-content: center;
     background-color: #666666;
@@ -16,8 +18,8 @@ body{
 .navbar{
     border-radius: 0px;
     margin-bottom: 0px;
-    position: absolute;
-    align-self: top;
+    /* position: absolute;
+    align-self: top; */
    
   }
   
@@ -29,6 +31,7 @@ body{
     position: top;
     top: 0;
     z-index: 20;
+    height:100%;
    }
    .navbar-brand img{
     height: 40px;
@@ -57,9 +60,10 @@ body{
   }
 
 .about-section{
-    background: url(../assets/background2.png) no-repeat left;
+    background: url(../assets/background2.png) ;
     background-size: 90%;
     background-color: #5f88a7;
+    background-size: cover;
     overflow: hidden;
     padding: 100px 0;
 }
@@ -78,7 +82,7 @@ body{
 }
 
 .text{
-    font-size: 13px;
+    font-size: 16px;
     color: #ffffff;
     line-height: 30px;
     text-align: justify;
