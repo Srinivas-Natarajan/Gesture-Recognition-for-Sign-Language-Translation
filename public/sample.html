@@ -33,6 +33,7 @@
       const mainSentence = document.getElementById('global-sentence'); 
       const cameraButton = document.getElementById('camera-switch');
       const spaceButton = document.getElementById('space');
+      const clearButton = document.getElementById('clear');
 
 
     // Step 2: Intialize Variables for Model and labels
@@ -109,6 +110,12 @@
     spaceButton.addEventListener('click', function(){
       mainSentence.textContent+='\xa0\xa0';
       globalSentence+='\xa0\xa0';
+      
+    });
+
+    clearButton.addEventListener('click', function(){
+      mainSentence.textContent='';
+      globalSentence="";
       
     });
 
@@ -418,6 +425,7 @@
 
   <div id="top-controls">
     <button id="space" class="btn btn-secondary btn-lg">Space</button>
+    <button id="clear" class="btn btn-secondary btn-lg">Clear All</button>
     <button id="backspace" class="btn btn-secondary btn-lg">Backspace</button> 
   </div>
 
@@ -430,7 +438,7 @@
 <div id="model-controls">
     <button id="model-change" class="btn btn-secondary btn-lg">Gesture Model</button>
     <h3 id="label">Label Here.</h3>
-    <!-- <button id="backspace" class="btn btn-secondary btn-lg">Backspace</button> -->
+    
     <button class="btn btn-secondary btn-lg" id="camera-switch">Camera Off</button>
 </div>
 </div>
