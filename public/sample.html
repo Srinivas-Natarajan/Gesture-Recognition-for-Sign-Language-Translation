@@ -32,6 +32,7 @@
       const modelName = document.getElementById('model-name');  
       const mainSentence = document.getElementById('global-sentence'); 
       const cameraButton = document.getElementById('camera-switch');
+      const spaceButton = document.getElementById('space');
 
 
     // Step 2: Intialize Variables for Model and labels
@@ -73,20 +74,22 @@
 
     modelButton.addEventListener('click', function(){
 
-      if(modelName.textContent == "Alphabet Model"){
-       
-        modelName.textContent = "Gesture Model";
+      console.log("Button Value: ", modelButton.innerHTML);
+      if(modelButton.innerHTML == "Alphabet Model"){
+
+        modelButton.innerHTML = "Gesture Model";
         let loadedModel = loadGestureModel().then((resolve, reject)=>{   //Handing the promise from before
             model = resolve;
         }).then(function() {
             console.log("Model: ", model);
             currentModel = "Gesture";
             console.log("Current Model: ", currentModel); 
-        })       
+        }) 
       }
+
       else{
 
-        modelName.textContent = "Alphabet Model";
+        modelButton.innerHTML = "Alphabet Model";
         let loadedModel = loadAlphabetModel().then((resolve, reject)=>{   //Handing the promise from before
             model = resolve;
         }).then(function() {
@@ -97,7 +100,8 @@
       }
     });
 
-    function getMainSenternse(){
+
+    function getMainSentence(){
       const mainSentence = document.getElementById('global-sentence');
       return mainSentence; 
     }
@@ -105,7 +109,7 @@
 
     backspaceButton.addEventListener('click', function(){
 
-      const ms=getMainSenternse();
+      const ms = getMainSentence();
 
       console.log("Length: ", ms.textContent);
       if(ms.textContent.length != 0){
@@ -206,18 +210,34 @@
             console.log("Promise Output: ", resolve, reject);
           }).then(function() {
               console.log("Answer: ", label);
+
+              predictionArray.push(label);
+              if(predictionArray.length > 20)
+                predictionArray = predictionArray.slice(-20);
+              console.log(predictionArray);
+
+              let distinctItems = [...new Set(predictionArray)];
+              
+              if(distinctItems.length == 1 && distinctItems.slice(-1)==label && predictionArray.length==20){
+                globalSentence += ' ' + label;
+                // predictionArray.splice(0, predictionArray.length);
+                predictionArray = []
+                mainSentence.textContent = globalSentence;
+              }  
+              console.log("Global Sentence: ", globalSentence);
+
           });
 
         }
 
         drawConnectors(canvasCtx, results.leftHandLandmarks, HAND_CONNECTIONS,
-                    {color: '#CC0000', lineWidth: 5});
+                      {color: '#858585', lineWidth: 2});  //#CC0000
         drawLandmarks(canvasCtx, results.leftHandLandmarks,
-                      {color: '#00FF00', lineWidth: 2});
+                      {color: '#f77979', lineWidth: 1});  //00FF00
         drawConnectors(canvasCtx, results.rightHandLandmarks, HAND_CONNECTIONS,
-                      {color: '#00CC00', lineWidth: 5});
+                      {color: '#858585', lineWidth: 2});
         drawLandmarks(canvasCtx, results.rightHandLandmarks,
-                      {color: '#FF0000', lineWidth: 2});
+                      {color: '#f0a66e', lineWidth: 1});
 
         canvasCtx.restore();
       }
@@ -288,13 +308,13 @@
         }
 
         drawConnectors(canvasCtx, results.leftHandLandmarks, HAND_CONNECTIONS,
-                      {color: '#CC0000', lineWidth: 5});
+                      {color: '#858585', lineWidth: 2});  //#CC0000
         drawLandmarks(canvasCtx, results.leftHandLandmarks,
-                      {color: '#00FF00', lineWidth: 2});
+                      {color: '#f77979', lineWidth: 1});  //00FF00
         drawConnectors(canvasCtx, results.rightHandLandmarks, HAND_CONNECTIONS,
-                      {color: '#00CC00', lineWidth: 5});
+                      {color: '#858585', lineWidth: 2});
         drawLandmarks(canvasCtx, results.rightHandLandmarks,
-                      {color: '#FF0000', lineWidth: 2});
+                      {color: '#f0a66e', lineWidth: 1});
         canvasCtx.restore();
       }
 
@@ -386,13 +406,19 @@
 <div id="global-content">
   <h2 id="global-sentence">Global Sentence</h2>
 </div>
-<div id="top-controls">
-  <h3 id="label">Label Here.</h3>
-  <button class="btn btn-secondary btn-lg" id="camera-switch">Camera Off</button>
-</div>
+<!-- <div id="top-controls">
+  <button id="spaae" class="btn btn-secondary btn-lg">Space</button>
+  <button id="backspace" class="btn btn-secondary btn-lg">Backspace</button> 
+</div> -->
 
 
 <div class="container">
+
+  <div id="top-controls">
+    <button id="space" class="btn btn-secondary btn-lg">Space</button>
+    <button id="backspace" class="btn btn-secondary btn-lg">Backspace</button> 
+  </div>
+
   <div id="canvas-video">
     <div id="loader"></div>
     <video class="input_video"></video>
@@ -400,9 +426,10 @@
 </div>
 
 <div id="model-controls">
-    <button id="model-change" class="btn btn-secondary btn-lg">Change Model</button>
-    <h3 id="model-name">Gesture Model</h3>
-    <button id="backspace" class="btn btn-secondary btn-lg">Backspace</button>
+    <button id="model-change" class="btn btn-secondary btn-lg">Gesture Model</button>
+    <h3 id="label">Label Here.</h3>
+    <!-- <button id="backspace" class="btn btn-secondary btn-lg">Backspace</button> -->
+    <button class="btn btn-secondary btn-lg" id="camera-switch">Camera Off</button>
 </div>
 </div>
 
