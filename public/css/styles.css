@@ -160,6 +160,8 @@ body{
   background-clip: text;
   -webkit-background-clip: text;
   background-image: linear-gradient(to right, #553c9a 45%, #ee4b2b);
+  position: relative;
+  
 }
 
 #model-name{
@@ -179,6 +181,13 @@ body{
   background-color:black;
   
 }
+
+#space:hover{
+  text-align: center;
+  background-color:black;
+  
+}
+
 #camera-switch:hover{
   text-align: center;
   background-color:black;
