@@ -106,6 +106,11 @@
       return mainSentence; 
     }
 
+    spaceButton.addEventListener('click', function(){
+      mainSentence.textContent+='\xa0\xa0';
+      globalSentence+='\xa0\xa0';
+      
+    });
 
     backspaceButton.addEventListener('click', function(){
 
@@ -219,7 +224,7 @@
               let distinctItems = [...new Set(predictionArray)];
               
               if(distinctItems.length == 1 && distinctItems.slice(-1)==label && predictionArray.length==20){
-                globalSentence += ' ' + label;
+                globalSentence += label;
                 // predictionArray.splice(0, predictionArray.length);
                 predictionArray = []
                 mainSentence.textContent = globalSentence;
@@ -406,10 +411,6 @@
 <div id="global-content">
   <h2 id="global-sentence">Global Sentence</h2>
 </div>
-<!-- <div id="top-controls">
-  <button id="spaae" class="btn btn-secondary btn-lg">Space</button>
-  <button id="backspace" class="btn btn-secondary btn-lg">Backspace</button> 
-</div> -->
 
 
 <div class="container">
