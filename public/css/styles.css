@@ -67,7 +67,7 @@
   vertical-align: middle;
   white-space: nowrap;
   display:flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 #global-content{
