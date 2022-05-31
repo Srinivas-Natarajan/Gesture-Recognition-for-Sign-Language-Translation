@@ -51,7 +51,7 @@
 
     // Step 3: Initialize static functions used for calculation
       function get_angles(a,b,c){
-        ang = (Math.atan2(c[1]-b[1], c[0]-b[0]) - Math.atan2(a[1]-b[1], a[0]-b[0])) * (180/Math.PI);
+        const ang = (Math.atan2(c[1]-b[1], c[0]-b[0]) - Math.atan2(a[1]-b[1], a[0]-b[0])) * (180/Math.PI);
         if(ang<0)
           return 360 + ang;
         else
@@ -203,18 +203,41 @@
 
           if (results.leftHandLandmarks){
             console.log("Left hand");
+            const angle_1 = get_angles((results.leftHandLandmarks[4]['x'], results.leftHandLandmarks[4]['y']),
+                                            (results.leftHandLandmarks[0]['x'], results.leftHandLandmarks[0]['y']),
+                                            (results.leftHandLandmarks[20]['x'], results.leftHandLandmarks[20]['y']));
+            const angle_2 = get_angles((results.leftHandLandmarks[8]['x'], results.leftHandLandmarks[8]['y']),
+                                            (results.leftHandLandmarks[5]['x'], results.leftHandLandmarks[5]['y']),
+                                            (results.leftHandLandmarks[10]['x'], results.leftHandLandmarks[10]['y']));       
+
             for(const landmarks of results.leftHandLandmarks){
               const temp = [landmarks.x * 480, landmarks.y * 640]   //ADJUST LATER
               landmark_list.push(temp);
+              // landmark_list.push(landmarks.x * 480);
+              // landmark_list.push(landmarks.y * 640);
             }
+            // landmark_list.push([angle_1, angle_2])
+            // landmark_list.push(angle_1);
+            // landmark_list.push(angle_2);
+            // console.log("Landmark List: ", landmark_list);
           } 
-          
           else if(results.rightHandLandmarks){
             console.log("Right hand");
+            const angle_1 = get_angles((results.rightHandLandmarks[4]['x'], results.rightHandLandmarks[4]['y']),
+                                            (results.rightHandLandmarks[0]['x'], results.rightHandLandmarks[0]['y']),
+                                            (results.rightHandLandmarks[20]['x'], results.rightHandLandmarks[20]['y']));
+            const angle_2 = get_angles((results.rightHandLandmarks[8]['x'], results.rightHandLandmarks[8]['y']),
+                                            (results.rightHandLandmarks[5]['x'], results.rightHandLandmarks[5]['y']),
+                                            (results.rightHandLandmarks[10]['x'], results.rightHandLandmarks[10]['y']));
             for(const landmarks of results.rightHandLandmarks){
               const temp = [landmarks.x * 480, landmarks.y * 640]   //ADJUST LATER
               landmark_list.push(temp);
+              // landmark_list.push(landmarks.x * 480);
+              // landmark_list.push(landmarks.y * 640);
             }
+            // landmark_list.push([angle_1, angle_2])
+            // landmark_list.push(angle_1);
+            // landmark_list.push(angle_2);
           }
 
           let predictionMade = predictModel(tf.tensor([landmark_list])).then((resolve, reject)=>{
